@@ -1,3 +1,6 @@
+> [!WARNING] 
+> Turns out AboutSettings.framework is only on Sequoia. This will only work on Sequoia until I rewrite most of this or find the old named framework (because it was probably renamed) I don't have a Sequoia device to test on right now
+
 # Macver
 About this Mac but pretty
 
