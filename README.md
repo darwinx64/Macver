@@ -9,5 +9,5 @@ About this Mac but pretty
 
 ## Building
 ### Requirements
-* macOS 13.5+
+* ~~macOS 13.5+~~
 * Xcode 16+
