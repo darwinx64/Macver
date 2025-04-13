@@ -2,7 +2,7 @@
 //  CUIBridge.h
 //  Macver
 //
-//  Created by paige on 12/15/24.
+//  Created by tiramisu on 12/15/24.
 //
 
 #import "CoreGraphics/CGImage.h"

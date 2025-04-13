@@ -2,23 +2,23 @@
 //  module.modulemap
 //  Macver
 //
-//  Created by paige on 12/15/24.
+//  Created by tiramisu on 12/15/24.
 //
 
 module CUIBridge {
-    header "CUIBridge.h"
-
-    export *
+	header "CUIBridge.h"
+	
+	export *
 }
 
 module ASIBridge {
-    header "ASIBridge.h"
-
-    export *
+	header "ASIBridge.h"
+	
+	export *
 }
 
 module ASBridge {
-    header "ASBridge.h"
-    
-    export *
+	header "ASBridge.h"
+	
+	export *
 }

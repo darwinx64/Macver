@@ -2,7 +2,7 @@
 //  DisplaysView.swift
 //  Macver
 //
-//  Created by paige on 12/17/24.
+//  Created by tiramisu on 12/17/24.
 //
 
 import SwiftUI
