@@ -9,19 +9,29 @@ import SwiftUI
 import ASBridge
 
 struct StorageSectionView: View {
-	@State private var volumes = ASStorageInfo.shared.mountedVolumes as! [ASVolumeRecord]
+	@State private var volumes: [ASVolumeRecord] = []
 	@Environment(\.openURL) private var openURL
 	
 	var body: some View {
 		Section("Storage") {
-			ForEach(volumes) {
+			ForEach(volumes, id: \.name) {
 				_volumeOverview(of: $0)
 			}
 			Button("Storage Settings...") {
 				if let storage = URL(string: "x-apple.systempreferences:com.apple.settings.Storage") {
 					openURL(storage)
 				}
-			}.frame(maxWidth: .infinity, alignment: .trailing)
+			}
+			.frame(maxWidth: .infinity, alignment: .trailing)
+			.onAppear {
+				// TODO: yeah
+				Timer.scheduledTimer(withTimeInterval: 0, repeats: true) {
+					volumes = ASStorageInfo.shared.mountedVolumes as! [ASVolumeRecord]
+					if (!volumes.isEmpty) {
+						$0.invalidate()
+					}
+				}
+			}
 		}
 	}
 	

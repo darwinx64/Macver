@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ASBridge
 
 // TODO: temp(?)
 func getSysctlValue(_ name: String) -> String {
@@ -16,63 +17,19 @@ func getSysctlValue(_ name: String) -> String {
 	return String(cString: machine)
 }
 
-// TODO: might be a better way idk; see Hackintool?
 func isHackintosh() -> Bool {
 	let task = Process()
-	task.executableURL = URL(fileURLWithPath: "/usr/sbin/kextstat")
+	task.executableURL = URL(filePath: "/usr/sbin/kextstat")
 	
 	let pipe = Pipe()
 	task.standardOutput = pipe
-	task.standardError = pipe
-	
-	do {
-		try task.run()
-		let data = pipe.fileHandleForReading.readDataToEndOfFile()
-		let output = String(data: data, encoding: .utf8)
-		
-		if let output = output, output.contains("VirtualSMC") || output.contains("FakeSMC") || output.contains("Lilu") || output.contains("WhateverGreen") {
-			return true
-		}
-	} catch {
-		print("\(error)")
-	}
-	
-	return false
-}
 
-// TODO: temp
-public extension ProcessInfo {
-	func osName() -> String? {
-		let version = self.operatingSystemVersion
-		switch version.majorVersion {
-			case 15: return "Sequoia"
-			case 14: return "Sonoma"
-			case 13: return "Ventura"
-			case 12: return "Monterey"
-			case 11: return "Big Sur"
-			case 10: break
-			default: return "\(version.majorVersion)"
-		}
-		switch version.minorVersion {
-			case 15: return "Catalina"
-			case 14: return "Mojave"
-			case 13: return "High Sierra"
-			case 12: return "Sierra"
-			case 11: return "El Capitan"
-			case 10: return "Yosemite"
-			case 9: return "Mavericks"
-			case 8: return "Mountain Lion"
-			case 7: return "Lion"
-			case 6: return "Snow Leopard"
-			case 5: return "Leopard"
-			case 4: return "Tiger"
-			case 3: return "Panther"
-			case 2: return "Jaguar"
-			case 1: return "Puma"
-			case 0: return "Cheetah"
-			default: return nil
-		}
-	}
+	try? task.run()
+	
+	let data = pipe.fileHandleForReading.readDataToEndOfFile()
+	let output = String(data: data, encoding: .utf8)!
+	
+	return output.contains("VirtualSMC") || output.contains("FakeSMC") || output.contains("Lilu") || output.contains("WhateverGreen")
 }
 
 struct SideView: View {
@@ -84,7 +41,7 @@ struct SideView: View {
 			)
 			
 			VStack(spacing: 5) {
-				Text("macOS \(ProcessInfo.processInfo.osName() ?? "")")
+				Text(ASPlatformInfo.shared.osTitleString)
 					.font(.largeTitle)
 				VStack {
 					Text("\(ProcessInfo.processInfo.operatingSystemVersionString)")
