@@ -8,30 +8,33 @@
 import SwiftUI
 import ASIBridge
 import ASBridge
+import MachO
 
 struct OverviewView: View {
+	@State private var serialHovered = false
+	private let appleSilicon = NXGetLocalArchInfo().pointee.cputype == CPU_TYPE_ARM64
+	@State private var fuck = ASStorageInfo.shared.mountedVolumes as! [ASVolumeRecord]
 	var body: some View {
 		Form {
-			LabeledContent("Processor", value: "\(ASI_CopyCurrentCPUDescription().takeUnretainedValue())")
-			if let gpu = ASDisplayHardwareInfo().mainGfxDisplayName() {
+			LabeledContent(appleSilicon ? "Chip" : "Processor", value: "\(ASI_CopyCurrentCPUDescription().takeUnretainedValue())")
+			if !appleSilicon,
+			   let gpu = ASDisplayHardwareInfo.shared.mainGfxDisplayName {
 				LabeledContent("Graphics", value: gpu)
 			}
 			LabeledContent("Memory", value: "\(ASI_CopyCurrentRAMDescriptionWithType().takeUnretainedValue())")
 			LabeledContent("Serial number") {
 				Text("\(ASI_CopyFormattedSerialNumber().takeUnretainedValue())")
-					.monospaced()
+					.onHover {
+						serialHovered = $0
+					}
+					.blur(radius: !serialHovered ? 4 : 0)
+					.animation(.spring, value: serialHovered)
 			}
 			
 			// TODO: temp
 			Section("Storage") {
-				LabeledContent {
-					Text("512 GB available of 1 TB")
-				} label: {
-					Label {
-						Text("Macintosh HD")
-					} icon: {
-						Image(nsImage: NSWorkspace.shared.icon(forFile: "/"))
-					}
+				ForEach(fuck) {
+					_volumeOverview(of: $0)
 				}
 				HStack {
 					Spacer()
@@ -43,6 +46,19 @@ struct OverviewView: View {
 		}
 		.scrollContentBackground(.hidden)
 		.formStyle(.grouped)
+	}
+	
+	@ViewBuilder
+	private func _volumeOverview(of volume: ASVolumeRecord) -> some View {
+		LabeledContent {
+			Text("\(volume.sizeAvailable) of \(volume.sizeTotal) available")
+		} label: {
+			Label {
+				Text(volume.name)
+			} icon: {
+				Image(nsImage: volume.image)
+			}
+		}
 	}
 }
 
