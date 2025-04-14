@@ -6,16 +6,20 @@
 //
 
 import SwiftUI
-import ASBridge
 
 struct StorageSectionView: View {
-	@State private var volumes: [ASVolumeRecord] = []
+	private let mountedVolumes: [Volume] = FileManager.default.mountedVolumeURLs(
+		includingResourceValuesForKeys: Volume.resourceKeys,
+		options: .skipHiddenVolumes
+	)?.map(Volume.init) ?? []
 	@Environment(\.openURL) private var openURL
 	
 	var body: some View {
 		Section("Storage") {
-			ForEach(volumes, id: \.name) {
-				_volumeOverview(of: $0)
+			ForEach(mountedVolumes) {
+				_volumeOverview(
+					of: $0
+				)
 			}
 			Button("Storage Settings...") {
 				if let storage = URL(string: "x-apple.systempreferences:com.apple.settings.Storage") {
@@ -23,22 +27,13 @@ struct StorageSectionView: View {
 				}
 			}
 			.frame(maxWidth: .infinity, alignment: .trailing)
-			.onAppear {
-				// TODO: yeah
-				Timer.scheduledTimer(withTimeInterval: 0, repeats: true) {
-					volumes = ASStorageInfo.shared.mountedVolumes as! [ASVolumeRecord]
-					if (!volumes.isEmpty) {
-						$0.invalidate()
-					}
-				}
-			}
 		}
 	}
 	
 	@ViewBuilder
-	private func _volumeOverview(of volume: ASVolumeRecord) -> some View {
+	private func _volumeOverview(of volume: Volume) -> some View {
 		LabeledContent {
-			Text("\(volume.sizeAvailable) of \(volume.sizeTotal) available")
+			Text("\(volume.availableCapacity) of \(volume.totalCapacity) available")
 		} label: {
 			Label {
 				Text(volume.name)
