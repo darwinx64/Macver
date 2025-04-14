@@ -5,20 +5,15 @@
 //  Created by tiramisu on 12/15/24.
 //
 
-module CUIBridge {
-	header "CUIBridge.h"
+
+module ASBridge {
+	header "ASBridge.h"
 	
 	export *
 }
 
 module ASIBridge {
 	header "ASIBridge.h"
-	
-	export *
-}
-
-module ASBridge {
-	header "ASBridge.h"
 	
 	export *
 }

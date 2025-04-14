@@ -10,6 +10,7 @@ import SwiftUI
 struct DisplaysView: View {
     var body: some View {
 		MVForm {
+		}.tabItem {
 			Text("Displays")
 		}
     }

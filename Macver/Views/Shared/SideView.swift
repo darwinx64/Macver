@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CUIBridge
 
 // TODO: temp(?)
 func getSysctlValue(_ name: String) -> String {
@@ -79,17 +78,10 @@ public extension ProcessInfo {
 struct SideView: View {
 	var body: some View {
 		VStack(spacing: 40) {
-			if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
-				Image("PreviewEmpty", bundle: Bundle.main)
-			} else {
-				if let catalog = CUICatalog(url: URL(fileURLWithPath: "/System/Library/PrivateFrameworks/SystemDesktopAppearance.framework/Versions/A/Resources/Assets.car"), error: nil) {
-					if let namedImage = catalog.image(withName: "AboutThisMacRoundel", scaleFactor: 0.75) {
-						if let image = namedImage.image {
-							Image(nsImage: NSImage(cgImage: image, size: NSZeroSize))
-						}
-					}
-				}
-			}
+			Image(
+				"AboutThisMacRoundel",
+				bundle: .init(identifier: "com.apple.preferences.SystemDesktopAppearance")!
+			)
 			
 			VStack(spacing: 5) {
 				Text("macOS \(ProcessInfo.processInfo.osName() ?? "")")

@@ -11,24 +11,12 @@ import ASIBridge
 struct ContentView: View {
     var body: some View {
         HStack {
-            SideView()
-            TabView {
-                OverviewView()
-                    .tabItem {
-                        Text("Overview")
-                    }
-                DisplaysView()
-                    .tabItem {
-                        Text("Displays")
-                    }
-                StorageView()
-                    .tabItem {
-                        Text("Storage")
-                    }
-                MemoryView()
-                    .tabItem {
-                        Text("Memory")
-                    }
+			SideView()
+			TabView {
+				OverviewView()
+				DisplaysView()
+				StorageView()
+				MemoryView()
             }
         }
 		.frame(width: 840)

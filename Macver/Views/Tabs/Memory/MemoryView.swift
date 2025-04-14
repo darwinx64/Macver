@@ -22,6 +22,8 @@ struct MemoryView: View {
 					Text("All memory slots are currently in use.")
 				}
 			}
+		}.tabItem {
+			Text("Memory")
 		}
 	}
 }

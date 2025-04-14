@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		A2BDACDF2DAC8BC90071CCD1 /* AboutSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BDACDE2DAC8BC80071CCD1 /* AboutSettings.framework */; };
 		A2BDACE32DAC8BF30071CCD1 /* AppleSystemInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BDACE22DAC8BF30071CCD1 /* AppleSystemInfo.framework */; };
-		A2BDACE62DAC8C170071CCD1 /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BDACE52DAC8C170071CCD1 /* CoreUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A2104AF62D0F8CEA00A6CE36 /* Macver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2BDACDE2DAC8BC80071CCD1 /* AboutSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AboutSettings.framework; path = ../../../../../System/Library/PrivateFrameworks/AboutSettings.framework; sourceTree = "<group>"; };
 		A2BDACE22DAC8BF30071CCD1 /* AppleSystemInfo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppleSystemInfo.framework; path = ../../../../../System/Library/PrivateFrameworks/AppleSystemInfo.framework; sourceTree = "<group>"; };
-		A2BDACE52DAC8C170071CCD1 /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = ../../../../../System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -47,7 +45,6 @@
 			files = (
 				A2BDACE32DAC8BF30071CCD1 /* AppleSystemInfo.framework in Frameworks */,
 				A2BDACDF2DAC8BC90071CCD1 /* AboutSettings.framework in Frameworks */,
-				A2BDACE62DAC8C170071CCD1 /* CoreUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +71,6 @@
 		A24C84732D0FF02200C614FF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A2BDACE52DAC8C170071CCD1 /* CoreUI.framework */,
 				A2BDACE22DAC8BF30071CCD1 /* AppleSystemInfo.framework */,
 				A2BDACDE2DAC8BC80071CCD1 /* AboutSettings.framework */,
 			);
@@ -303,7 +299,7 @@
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
-				MACOSX_DEPLOYMENT_TARGET = 15;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tiramisu.Macver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -337,7 +333,7 @@
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
-				MACOSX_DEPLOYMENT_TARGET = 15;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tiramisu.Macver;
 				PRODUCT_NAME = "$(TARGET_NAME)";

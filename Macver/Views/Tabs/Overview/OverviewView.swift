@@ -14,7 +14,6 @@ struct OverviewView: View {
 	@State private var serialHovered = false
 	
 	private let appleSilicon = NXGetLocalArchInfo().pointee.cputype == CPU_TYPE_ARM64
-	@State private var fuck = ASStorageInfo.shared.mountedVolumes as! [ASVolumeRecord]
 	
 	var body: some View {
 		MVForm {
@@ -34,32 +33,9 @@ struct OverviewView: View {
 					.blur(radius: !serialHovered ? 4 : 0)
 					.animation(.spring, value: serialHovered)
 			}
-			
-			// TODO: temp
-			Section("Storage") {
-				ForEach(fuck) {
-					_volumeOverview(of: $0)
-				}
-				HStack {
-					Spacer()
-					Button("Storage Settings...") {
-						
-					}
-				}
-			}
-		}
-	}
-	
-	@ViewBuilder
-	private func _volumeOverview(of volume: ASVolumeRecord) -> some View {
-		LabeledContent {
-			Text("\(volume.sizeAvailable) of \(volume.sizeTotal) available")
-		} label: {
-			Label {
-				Text(volume.name)
-			} icon: {
-				Image(nsImage: volume.image)
-			}
+			StorageSectionView()
+		}.tabItem {
+			Text("Overview")
 		}
 	}
 }
