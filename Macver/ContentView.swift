@@ -31,6 +31,7 @@ struct ContentView: View {
                     }
             }
         }
+		.frame(width: 840)
         .background(VisualEffectView().ignoresSafeArea())
     }
 }
