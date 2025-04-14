@@ -12,16 +12,20 @@ import MachO
 
 struct OverviewView: View {
 	@State private var serialHovered = false
+	
 	private let appleSilicon = NXGetLocalArchInfo().pointee.cputype == CPU_TYPE_ARM64
 	@State private var fuck = ASStorageInfo.shared.mountedVolumes as! [ASVolumeRecord]
+	
 	var body: some View {
-		Form {
+		MVForm {
 			LabeledContent(appleSilicon ? "Chip" : "Processor", value: "\(ASI_CopyCurrentCPUDescription().takeUnretainedValue())")
-			if !appleSilicon,
-			   let gpu = ASDisplayHardwareInfo.shared.mainGfxDisplayName {
+			
+			if !appleSilicon, let gpu = ASDisplayHardwareInfo.shared.mainGfxDisplayName {
 				LabeledContent("Graphics", value: gpu)
 			}
+			
 			LabeledContent("Memory", value: "\(ASI_CopyCurrentRAMDescriptionWithType().takeUnretainedValue())")
+			
 			LabeledContent("Serial number") {
 				Text("\(ASI_CopyFormattedSerialNumber().takeUnretainedValue())")
 					.onHover {
@@ -44,8 +48,6 @@ struct OverviewView: View {
 				}
 			}
 		}
-		.scrollContentBackground(.hidden)
-		.formStyle(.grouped)
 	}
 	
 	@ViewBuilder

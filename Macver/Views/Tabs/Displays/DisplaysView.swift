@@ -9,7 +9,9 @@ import SwiftUI
 
 struct DisplaysView: View {
     var body: some View {
-        Text("Displays").padding(100)
+		MVForm {
+			Text("Displays")
+		}
     }
 }
 

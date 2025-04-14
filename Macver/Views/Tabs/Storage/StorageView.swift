@@ -9,7 +9,9 @@ import SwiftUI
 
 struct StorageView: View {
 	var body: some View {
-		Text("Storage").padding(100)
+		MVForm {
+			Text("Storage")
+		}
 	}
 }
 
